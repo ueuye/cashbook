@@ -21,7 +21,7 @@ public class AddMemberController extends HttpServlet {
 		// session 유효검사(null일때만)
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") != null) {
-			response.sendRedirect(request.getContextPath()+"/cashbook");
+			response.sendRedirect(request.getContextPath()+"/calendar");
 			return;
 		}
 		
@@ -35,7 +35,7 @@ public class AddMemberController extends HttpServlet {
 		// session 유효검사(null일때만)
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") != null) {
-			response.sendRedirect(request.getContextPath()+"/cashbook");
+			response.sendRedirect(request.getContextPath()+"/calendar");
 			return;
 		}
 		

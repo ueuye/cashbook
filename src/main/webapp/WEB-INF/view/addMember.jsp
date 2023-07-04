@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +10,11 @@
 	<form method="post" action="${pageContext.request.contextPath}/addMember"> 
 		<table border="1">
 			<tr>
-				<td>memberId</td>
+				<td>아이디</td>
 				<td><input type="text" name="memberId"></td>
 			</tr>
 			<tr>
-				<td>memberPw</td>
+				<td>비밀번호</td>
 				<td><input type="password" name="memberPw"></td>
 			</tr>
 		</table>

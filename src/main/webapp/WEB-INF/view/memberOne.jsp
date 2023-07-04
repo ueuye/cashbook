@@ -10,18 +10,23 @@
 <title>memberOne.jsp</title>
 </head>
 <body>
+	<div>
+		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+		<a href="${pageContext.request.contextPath}/calendar">캘린더</a>
+	</div>
+	
 	<h1>회원상세정보</h1>
+		<a href="${pageContext.request.contextPath}/modifyMember">회원정보수정</a>
+		<a href="${pageContext.request.contextPath}/removeMember">회원정보탈퇴</a>
 		<table border="1">
 			<tr>
-				<td>memberId</td>
+				<td>아이디</td>
 				<td><%=member.getMemberId() %></td>
 			</tr>
 			<tr>
-				<td>memberPw</td>
+				<td>비밀번호</td>
 				<td><%=member.getMemberPw().substring(0,2) %>*****</td>
 			</tr>
 		</table>
-		<a href="${pageContext.request.contextPath}/modifyMember">회원정보수정</a>
-		<a href="${pageContext.request.contextPath}/removeMember">회원정보탈퇴</a>
 </body>
 </html>

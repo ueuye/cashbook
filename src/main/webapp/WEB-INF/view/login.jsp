@@ -10,11 +10,11 @@
 	<form method="post" action="${pageContext.request.contextPath}/login"> 
 		<table border="1">
 			<tr>
-				<td>memberId</td>
+				<td>ID</td>
 				<td><input type="text" name="memberId"></td>
 			</tr>
 			<tr>
-				<td>memberPw</td>
+				<td>PW</td>
 				<td><input type="password" name="memberPw"></td>
 			</tr>
 		</table>
