@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 @SuppressWarnings("serial")
 @WebServlet("/logout")
 public class LogoutController extends HttpServlet {
-	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();

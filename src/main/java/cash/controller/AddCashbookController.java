@@ -18,6 +18,7 @@ import cash.vo.Member;
 @WebServlet("/addCashbook")
 public class AddCashbookController extends HttpServlet {
 	// 입력폼
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// session 유효성 검사
 		HttpSession session = request.getSession();
@@ -26,7 +27,6 @@ public class AddCashbookController extends HttpServlet {
 			return;
 		}
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		String memberId = loginMember.getMemberId();
 		
 		// request 매개값
 		int targetYear = Integer.parseInt(request.getParameter("targetYear"));
@@ -46,7 +46,7 @@ public class AddCashbookController extends HttpServlet {
 		String cashbookDate = targetYear+"-"+strM+"-"+strD;
 		// 나머지 데이터는 입력폼에서 사용자가 입력
 		
-		request.setAttribute("memberId", memberId);
+		request.setAttribute("memberId", loginMember.getMemberId());
 		request.setAttribute("targetYear", targetYear);
 		request.setAttribute("targetMonth", targetMonth);
 		request.setAttribute("targetDate", targetDate);	
@@ -57,6 +57,7 @@ public class AddCashbookController extends HttpServlet {
 	}
 	
 	// 입력액션
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		// request 매개값

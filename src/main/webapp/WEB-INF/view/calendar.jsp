@@ -33,7 +33,7 @@
 		<h2>이달의 해시태그</h2>
 		<div>
 			<c:forEach var="m" items="${htList}">
-				<a href="">${m.word}(${m.cnt})</a>
+				<a href="${pageContext.request.contextPath}/hashtag?word=${m.word}">${m.word}(${m.cnt})</a>
 			</c:forEach>
 		</div>
 	</div>

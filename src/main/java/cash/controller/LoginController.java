@@ -14,7 +14,8 @@ import cash.vo.Member;
 @SuppressWarnings("serial")
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
-       
+	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// session 인증 검사 코드
 		HttpSession session = request.getSession();
@@ -24,7 +25,8 @@ public class LoginController extends HttpServlet {
 	      }
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
-
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 요청값 변수에 저장
 		String memberId = request.getParameter("memberId");
