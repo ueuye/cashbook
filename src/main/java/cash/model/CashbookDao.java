@@ -53,8 +53,7 @@ public class CashbookDao {
 	}
 	
 	// 월간 수입, 지출 출력
-	public List<Cashbook> selectCashbookListByMonth(
-			String memberId, int targetYear, int targetMonth){
+	public List<Cashbook> selectCashbookListByMonth(String memberId, int targetYear, int targetMonth){
 		
 		List<Cashbook> list = new ArrayList<Cashbook>();
 		Connection conn = null;
@@ -97,8 +96,7 @@ public class CashbookDao {
 	}
 	
 	// 일간 수입/지출 출력
-	public List<Cashbook> selectCashbookListByDate(
-			String memberId, int targetYear, int targetMonth, int targetDate){
+	public List<Cashbook> selectCashbookListByDate(String memberId, int targetYear, int targetMonth, int targetDate){
 		
 		List<Cashbook> list = new ArrayList<Cashbook>();
 		Connection conn = null;
