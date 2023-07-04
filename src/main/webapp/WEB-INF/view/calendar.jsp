@@ -9,6 +9,11 @@
 <title>calendar.jsp</title>
 </head>
 <body>
+	<div>
+		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+		<a href="${pageContext.request.contextPath}/memberOne">회원정보</a>
+	</div>
+	
 	<!-- 변수값or반환값 : EL사용 $ 표현식 -->
 	<!-- 
 		속성값대신 EL사용 
@@ -23,6 +28,15 @@
 	<h1>${targetYear}년 ${targetMonth+1}월</h1>
 	<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전</a>
 	<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음</a>
+	
+	<div>
+		<h2>이달의 해시태그</h2>
+		<div>
+			<c:forEach var="m" items="${htList}">
+				<a href="">${m.word}(${m.cnt})</a>
+			</c:forEach>
+		</div>
+	</div>
 	
 	<table border="1">
 		<tr>
@@ -49,7 +63,7 @@
 				<c:if test="${!(d < 1 || d > lastDate)}">
 					<td>
 						<div>
-							<a href="${pageContext.request.contextPath}/calendarByDate?y=${targetYear }&m=${targetMonth }&d=${d}">${d}</a>
+							<a href="${pageContext.request.contextPath}/cashbook?targetYear=${targetYear }&targetMonth=${targetMonth }&targetDate=${d}">${d}</a>
 						</div>
 						<c:forEach var="c" items="${list}">
 							<c:if test="${d == fn:substring(c.cashbookDate,8,10) }">
