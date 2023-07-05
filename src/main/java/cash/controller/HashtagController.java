@@ -25,6 +25,7 @@ public class HashtagController extends HttpServlet {
 			return;
 		}
 		
+		
 		String word = request.getParameter("word");
 		HashtagDao hashtagDao = new HashtagDao();
 		List<Map<String, Object>> list = hashtagDao.selectHashtag(word);
