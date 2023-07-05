@@ -1,6 +1,9 @@
 package cash.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,25 +91,30 @@ public class AddCashbookController extends HttpServlet {
 			return;
 		}
 		// 입력 성공시 -> 해시태그가 있다면 -> 해시태그 추출 -> 해시태그 입력(반복)
-		System.out.println("입력성공");
+		System.out.println("가계부 입력성공");
 		
 		// 해시태그 추출 알고리즘
 		HashtagDao hashtagDao = new HashtagDao();
 		String memo1 = cashbook.getMemo();
 		String memo2 = memo1.replace("#", " #"); // "#구디#아카데미" -> " #구디 #아카데미"
+		
+		Set<String> set = new HashSet<String>(); // 중복된 해시태그방지를 위해 set자료구조를 사용
 		// 해시태그가 여러개이면 반복해서 입력
-		for(String ht : memo2.split(" ")) {
-			if(ht.contains("#")) {
-				String ht2 = ht.replace("#", "");
-				if(ht2.length() > 0) {
-					Hashtag hashtag = new Hashtag();
-					hashtag.setCashbookNo(cashbookNo);
-					hashtag.setWord(ht2);
-					hashtagDao.insertHashtag(hashtag);
-					System.out.println("hashtag입력성공");
-				}
-			}
+		for(String ht : memo2.split(" ")) { // issue : split된 배열을 Set으로 변경하면 중복된 내용 제거 가능
+			if (ht.startsWith("#")) {
+                String ht2 = ht.replace("#", "");
+			    if(ht2.length() > 0) {
+                    set.add(ht2); // set은 중복된 값은 add되지 않는다
+			    }
+            }
 		}
+        for(String s : set) {
+    		Hashtag hashtag = new Hashtag();
+			hashtag.setCashbookNo(cashbookNo);
+			hashtag.setWord(s);
+			hashtagDao.insertHashtag(hashtag);
+			System.out.println("hashtag입력성공");
+        }
 		
 		// redirect -> CalendarByDateController -> forward -> jsp
 		response.sendRedirect(request.getContextPath()+"/cashbook?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDate="+targetDate);
