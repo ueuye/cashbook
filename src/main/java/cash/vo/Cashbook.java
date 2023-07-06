@@ -9,21 +9,15 @@ public class Cashbook {
 	private String memo;
 	private String updatedate;
 	private String createdate;
+	private String sumPrice;
 	
 	public Cashbook() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public String toString() {
-		return "Cashbook [cashbookNo=" + cashbookNo + ", memberId=" + memberId + ", category=" + category
-				+ ", cashbookDate=" + cashbookDate + ", price=" + price + ", memo=" + memo + ", updatedate="
-				+ updatedate + ", createdate=" + createdate + "]";
-	}
-
 	public Cashbook(int cashbookNo, String memberId, String category, String cashbookDate, int price, String memo,
-			String updatedate, String createdate) {
+			String updatedate, String createdate, String sumPrice) {
 		super();
 		this.cashbookNo = cashbookNo;
 		this.memberId = memberId;
@@ -33,7 +27,17 @@ public class Cashbook {
 		this.memo = memo;
 		this.updatedate = updatedate;
 		this.createdate = createdate;
+		this.sumPrice = sumPrice;
 	}
+	
+	@Override
+	public String toString() {
+		return "Cashbook [cashbookNo=" + cashbookNo + ", memberId=" + memberId + ", category=" + category
+				+ ", cashbookDate=" + cashbookDate + ", price=" + price + ", memo=" + memo + ", updatedate="
+				+ updatedate + ", createdate=" + createdate + ", sumPrice=" + sumPrice + "]";
+	}
+
+	
 	public int getCashbookNo() {
 		return cashbookNo;
 	}
@@ -97,5 +101,14 @@ public class Cashbook {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
+
+	public String getSumPrice() {
+		return sumPrice;
+	}
+
+	public void setSumPrice(String sumPrice) {
+		this.sumPrice = sumPrice;
+	}
+	
 
 }

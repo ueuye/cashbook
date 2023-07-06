@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,7 +180,56 @@ public class CashbookDao {
 		}		
 		return list;
 	}
-	
+	// 일간 수입, 지출 총액 출력
+	public List<Cashbook> selectCashbookSum(String memberId, int targetYear, int targetMonth){
+		DecimalFormat decFormat = new DecimalFormat("###,###");
+		List<Cashbook> list = new ArrayList<Cashbook>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT category, sum(price) price, cashbook_date cashbookDate FROM cashbook "
+				+ "WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? "
+				+ "AND category = '수입' "
+				+ "GROUP BY cashbook_date "
+				+ "UNION "
+				+ "SELECT category, sum(price) price, cashbook_date cashbookDate FROM cashbook "
+				+ "WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? "
+				+ "AND category = '지출' "
+				+ "GROUP BY cashbook_date";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1,memberId);
+			stmt.setInt(2,targetYear);
+			stmt.setInt(3,targetMonth);
+			stmt.setString(4,memberId);
+			stmt.setInt(5,targetYear);
+			stmt.setInt(6,targetMonth);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Cashbook c = new Cashbook();
+				c.setCategory(rs.getString("category"));
+				c.setSumPrice(decFormat.format(rs.getInt("price")));
+				c.setCashbookDate(rs.getString("cashbookDate"));
+				list.add(c);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}		
+		return list;
+	}
+		
 	// 일간 수입/지출 출력
 	public List<Cashbook> selectCashbookListByDate(String memberId, int targetYear, int targetMonth, int targetDate){
 		

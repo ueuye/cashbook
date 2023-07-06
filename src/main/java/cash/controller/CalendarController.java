@@ -29,6 +29,7 @@ public class CalendarController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}
+		// 로그인 정보 저장
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		// view 에 넘겨줄 달력정보(모델값)
@@ -73,23 +74,60 @@ public class CalendarController extends HttpServlet {
 		
 		// 오늘 날짜 
 		Calendar today = Calendar.getInstance();
+		int todayYear = today.get(Calendar.YEAR);
+		int todayMonth = today.get(Calendar.MONTH);
+		
+		// targetMonth 영문으로 변환
+		String strTargetMonth = null;
+		if(targetMonth == 0) {
+			strTargetMonth = "January";
+		}else if(targetMonth == 1) {
+			strTargetMonth = "February";
+		}else if(targetMonth == 2) {
+			strTargetMonth = "March";
+		}else if(targetMonth == 3) {
+			strTargetMonth = "April";
+		}else if(targetMonth == 4) {
+			strTargetMonth = "May";
+		}else if(targetMonth == 5) {
+			strTargetMonth = "June";
+		}else if(targetMonth == 6) {
+			strTargetMonth = "July";
+		}else if(targetMonth == 7) {
+			strTargetMonth = "August";
+		}else if(targetMonth == 8) {
+			strTargetMonth = "September";
+		}else if(targetMonth == 9) {
+			strTargetMonth = "October";
+		}else if(targetMonth == 10) {
+			strTargetMonth = "November";
+		}else {
+			strTargetMonth = "December";
+		}
 		
 		// 모델을 호출(DAO 타겟 월의 수입/ 지출 데이터)
 		List<Cashbook> list = new CashbookDao().selectCashbookListByMonth(loginMember.getMemberId(), targetYear, targetMonth+1);
+		List<Cashbook> sumList = new CashbookDao().selectCashbookSum(loginMember.getMemberId(), targetYear, targetMonth+1);
 		List<Map<String, Object>> htList = new HashtagDao().selectWordCountByMonth(loginMember.getMemberId(), targetYear, targetMonth+1);
-		
 		
 		// 뷰에 값넘기기(request 속성)
 		request.setAttribute("targetYear", targetYear);
 		request.setAttribute("targetMonth", targetMonth);
+		
 		request.setAttribute("lastDate", lastDate);
 		request.setAttribute("totalCell", totalCell);
 		request.setAttribute("beginBlank", beginBlank);
 		request.setAttribute("endBlank", endBlank);
+		
 		request.setAttribute("today", today);
+		request.setAttribute("todayYear", todayYear);
+		request.setAttribute("todayMonth", todayMonth);
 		
 		request.setAttribute("list", list);
+		request.setAttribute("sumList", sumList);
 		request.setAttribute("htList", htList);
+		
+		request.setAttribute("strTargetMonth", strTargetMonth);
 		
 		// 달력을 출력하는 뷰
 		request.getRequestDispatcher("/WEB-INF/view/calendar.jsp").forward(request, response);

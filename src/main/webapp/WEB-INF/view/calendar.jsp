@@ -7,46 +7,55 @@
 <head>
 <meta charset="UTF-8">
 <title>calendar.jsp</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
 </head>
 <body>
-	<div>
-		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/memberOne">회원정보</a>
+<div class="container w70">
+	<!-- navbar -->
+	<nav>
+		<a href="${pageContext.request.contextPath}/calendar" class="is-current">Calendar</a>
+		<a href="${pageContext.request.contextPath}/logout">Logout</a>
+		<a href="${pageContext.request.contextPath}/memberOne">MyPage</a>
+		<div class="nav-underline"></div>
+	</nav>
+	<br>
+	<div class="p-t-5">
+		<!-- targetMonth calendar -->
+		<h1 class="dis">${strTargetMonth} ${targetYear}</h1>
+		<div class="dis_r">
+			<!-- 오늘 날짜 달력으로 이동 -->
+			<a class="btn btn-sm b03 cl02 dis" href="${pageContext.request.contextPath}/calendar?targetYear=${todayYear}&targetMonth=${todayMonth}">today</a>
+			<!-- 이전 달, 다음 달 이동 -->			
+			<div class="btn-group btn-group-sm">
+				<a class="btn b02 cl02 dis" href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">&#10094;</a>
+				<a class="btn b02 cl02 dis" href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">&#10095;</a>
+			</div>
+		</div>
 	</div>
-	
-	<!-- 변수값or반환값 : EL사용 $ 표현식 -->
-	<!-- 
-		속성값대신 EL사용 
-		ex) 
-		request.getAttribute("targetYear") -- requestScope.targetYear 
-		(requestScope는 생략가능)
-		형변환연산이 필요없다(EL이 자동으로 처리)
-	-->
-	
-	<!-- 자바코드(제어문) : JSTL 사용 -->
-		
-	<h1>${targetYear}년 ${targetMonth+1}월</h1>
-	<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전</a>
-	<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음</a>
-	
-	<div>
-		<h2>이달의 해시태그</h2>
-		<div>
+	<br>
+	<div class="p-l-20 p-b-10">
+		<h5 class = "dis"># 이달의 해시태그 &nbsp;&nbsp;</h5>
+		<div class = "dis">
 			<c:forEach var="m" items="${htList}">
-				<a href="${pageContext.request.contextPath}/cashbookListByTag?word=${m.word}">${m.word}(${m.cnt})</a>
+				<a class="cl01 an" href="${pageContext.request.contextPath}/cashbookListByTag?word=${m.word}">${m.word}(${m.cnt})</a>
 			</c:forEach>
 		</div>
 	</div>
 	
-	<table border="1">
-		<tr>
-			<td>일</td>
-			<td>월</td>
-			<td>화</td>
-			<td>수</td>
-			<td>목</td>
-			<td>금</td>
-			<td>토</td>
+	<div class="shadow">
+	<table class="table table-bordered">
+		<tr class="text-center">
+			<th>Sun</th>
+			<th>Mon</th>
+			<th>Tue</th>
+			<th>Wed</th>
+			<th>Thu</th>
+			<th>Fri</th>
+			<th>Sat</th>
 		</tr>
 		<tr>
 			<c:forEach var="i" begin="0" end="${totalCell - 1}" step="1">
@@ -57,22 +66,22 @@
 				</c:if>
 				
 				<c:if test="${d < 1 || d > lastDate}">
-					<td></td>
+					<td>&nbsp;</td>
 				</c:if>
 				
 				<c:if test="${!(d < 1 || d > lastDate)}">
-					<td>
-						<div>
-							<a href="${pageContext.request.contextPath}/cashbook?targetYear=${targetYear }&targetMonth=${targetMonth }&targetDate=${d}">${d}</a>
+					<td class="td02">
+						<div class="t-r p-b-5">
+							<a class="an cl03 p-r-10" href="${pageContext.request.contextPath}/cashbook?targetYear=${targetYear }&targetMonth=${targetMonth }&targetDate=${d}">${d}</a>
 						</div>
-						<c:forEach var="c" items="${list}">
+						<c:forEach var="c" items="${sumList}">
 							<c:if test="${d == fn:substring(c.cashbookDate,8,10) }">
-								<div>
+								<div class="t-r">
 									<c:if test="${c.category == '수입' }">
-										<span> + ${c.price }</span>
+										<span class="cl04">+${c.sumPrice}</span>
 									</c:if>
 									<c:if test="${c.category == '지출' }">
-										<span style="color:red;"> - ${c.price }</span>
+										<span class="cl01">-${c.sumPrice}</span>
 									</c:if>
 								</div>
 							</c:if>
@@ -81,5 +90,8 @@
 				</c:if>
 			</c:forEach>
 	</table>
+	</div>
+	<br>
+</div>
 </body>
 </html>
