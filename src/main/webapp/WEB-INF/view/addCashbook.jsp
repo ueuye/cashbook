@@ -7,14 +7,14 @@
 </head>
 <body>
 	<div>
-		<a href="${pageContext.request.contextPath}/cashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">이전</a>
-		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/memberOne">회원정보</a>
+		<a href="${pageContext.request.contextPath}/on/cashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">이전</a>
+		<a href="${pageContext.request.contextPath}/on/logout">로그아웃</a>
+		<a href="${pageContext.request.contextPath}/on/memberOne">회원정보</a>
 	</div>
 	
 	<h1>가계부 추가</h1>
 	
-	<form method="post" action="${pageContext.request.contextPath}/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}"> 
+	<form method="post" action="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}"> 
 		<input type="hidden" name="memberId" value="${memberId}">
 		<input type="hidden" name="cashbookDate" value="${cashbookDate}">
 		<table border="1">

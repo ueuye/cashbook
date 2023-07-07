@@ -17,9 +17,9 @@
 <div class="container w70">
 	<!-- navbar -->
 	<nav>
-		<a href="${pageContext.request.contextPath}/calendar" class="is-current">Calendar</a>
-		<a href="${pageContext.request.contextPath}/logout">Logout</a>
-		<a href="${pageContext.request.contextPath}/memberOne">MyPage</a>
+		<a href="${pageContext.request.contextPath}/on/calendar" class="is-current">Calendar</a>
+		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
+		<a href="${pageContext.request.contextPath}/on/memberOne">MyPage</a>
 		<div class="nav-underline"></div>
 	</nav>
 	<br>
@@ -28,11 +28,11 @@
 		<h1 class="dis">${strTargetMonth} ${targetYear}</h1>
 		<div class="dis_r">
 			<!-- 오늘 날짜 달력으로 이동 -->
-			<a class="btn btn-sm b03 cl02 dis" href="${pageContext.request.contextPath}/calendar?targetYear=${todayYear}&targetMonth=${todayMonth}">today</a>
+			<a class="btn btn-sm b03 cl02 dis" href="${pageContext.request.contextPath}/on/calendar?targetYear=${todayYear}&targetMonth=${todayMonth}">today</a>
 			<!-- 이전 달, 다음 달 이동 -->			
 			<div class="btn-group btn-group-sm">
-				<a class="btn b02 cl02 dis" href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">&#10094;</a>
-				<a class="btn b02 cl02 dis" href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">&#10095;</a>
+				<a class="btn b02 cl02 dis" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">&#10094;</a>
+				<a class="btn b02 cl02 dis" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">&#10095;</a>
 			</div>
 		</div>
 	</div>
@@ -41,7 +41,7 @@
 		<h5 class = "dis"># 이달의 해시태그 &nbsp;&nbsp;</h5>
 		<div class = "dis">
 			<c:forEach var="m" items="${htList}">
-				<a class="cl01 an" href="${pageContext.request.contextPath}/cashbookListByTag?word=${m.word}">${m.word}(${m.cnt})</a>
+				<a class="cl01 an" href="${pageContext.request.contextPath}/on/cashbookListByTag?word=${m.word}">${m.word}(${m.cnt})</a>
 			</c:forEach>
 		</div>
 	</div>
@@ -72,7 +72,7 @@
 				<c:if test="${!(d < 1 || d > lastDate)}">
 					<td class="td02">
 						<div class="t-r p-b-5">
-							<a class="an cl03 p-r-10" href="${pageContext.request.contextPath}/cashbook?targetYear=${targetYear }&targetMonth=${targetMonth }&targetDate=${d}">${d}</a>
+							<a class="an cl03 p-r-10" href="${pageContext.request.contextPath}/on/cashbook?targetYear=${targetYear }&targetMonth=${targetMonth }&targetDate=${d}">${d}</a>
 						</div>
 						<c:forEach var="c" items="${sumList}">
 							<c:if test="${d == fn:substring(c.cashbookDate,8,10) }">

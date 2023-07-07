@@ -12,16 +12,12 @@ import cash.model.MemberDao;
 import cash.vo.Member;
 
 @SuppressWarnings("serial")
-@WebServlet("/modifyMember")
+@WebServlet("/on/modifyMember")
 public class ModifyMemberController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 유효성 검사
+		// 로그인정보 저장
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		// 모델 값 구하기(Dao 메서드 호출)
 		MemberDao memberDao = new MemberDao();
@@ -38,7 +34,7 @@ public class ModifyMemberController extends HttpServlet {
 		// session 유효성 검사
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/off/login");
 			return;
 		}
 		
@@ -57,11 +53,11 @@ public class ModifyMemberController extends HttpServlet {
 		int row = memberDao.modifyMember(member);
 		if(row == 1) { // 회원정보수정 성공
 			// memberOne.jsp view를 이동하는 controller를 리다이렉트
-			response.sendRedirect(request.getContextPath()+"/memberOne");
+			response.sendRedirect(request.getContextPath()+"/on/memberOne");
 			System.out.println("회원정보수정 성공");
 		}else {// 회원정보수정 실패
 			// modifyMember.jsp view를 이동하는 controller를 리다이렉트
-			response.sendRedirect(request.getContextPath()+"/modifyMember");
+			response.sendRedirect(request.getContextPath()+"/on/modifyMember");
 			System.out.println("회원정보수정 실패");
 		}
 	}

@@ -15,16 +15,12 @@ import cash.vo.Cashbook;
 import cash.vo.Member;
 
 @SuppressWarnings("serial")
-@WebServlet("/cashbook")
+@WebServlet("/on/cashbook")
 public class CashbookController extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 인증 검사 코드
+		// 로그인정보 저장
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		int targetYear = Integer.parseInt(request.getParameter("targetYear"));

@@ -11,13 +11,13 @@
 </head>
 <body>
 	<div>
-		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/calendar">캘린더</a>
+		<a href="${pageContext.request.contextPath}/on/logout">로그아웃</a>
+		<a href="${pageContext.request.contextPath}/on/calendar">캘린더</a>
 	</div>
 	
 	<h1>회원상세정보</h1>
-		<a href="${pageContext.request.contextPath}/modifyMember">회원정보수정</a>
-		<a href="${pageContext.request.contextPath}/removeMember">회원정보탈퇴</a>
+		<a href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
+		<a href="${pageContext.request.contextPath}/on/removeMember">회원정보탈퇴</a>
 		<table border="1">
 			<tr>
 				<td>아이디</td>

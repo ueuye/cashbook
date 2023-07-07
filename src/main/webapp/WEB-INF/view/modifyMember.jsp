@@ -11,13 +11,13 @@
 </head>
 <body>
 	<div>
-		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/memberOne">이전</a>
+		<a href="${pageContext.request.contextPath}/on/logout">로그아웃</a>
+		<a href="${pageContext.request.contextPath}/on/memberOne">이전</a>
 	</div>
 	
 	<h1>회원정보 수정</h1>
 	
-	<form method="post" action="${pageContext.request.contextPath}/modifyMember">
+	<form method="post" action="${pageContext.request.contextPath}/on/modifyMember">
 		<table border="1">
 			<tr>
 				<td>아이디</td>

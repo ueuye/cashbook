@@ -12,16 +12,11 @@ import cash.model.MemberDao;
 import cash.vo.Member;
 
 @SuppressWarnings("serial")
-@WebServlet("/removeMember")
+@WebServlet("/on/removeMember")
 public class RemoveMemberController extends HttpServlet {
 	// 비밀번호 입력 폼
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		
 		request.getRequestDispatcher("/WEB-INF/view/removeMember.jsp").forward(request, response);
 	}
@@ -29,11 +24,8 @@ public class RemoveMemberController extends HttpServlet {
 	// 탈퇴
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 로그인정보 저장
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		String memberPw = request.getParameter("memberPw");
@@ -47,11 +39,11 @@ public class RemoveMemberController extends HttpServlet {
 		int row = memberDao.removeMember(member);
 		if(row == 1) { // 회원탈퇴 성공
 			session.invalidate();
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/off/login");
 			return;
 		}else {// 회원탈퇴 실패
 			// removeMember.jsp view를 이동하는 controller를 리다이렉트
-			response.sendRedirect(request.getContextPath()+"/removeMember");
+			response.sendRedirect(request.getContextPath()+"/on/removeMember");
 		}
 	}
 

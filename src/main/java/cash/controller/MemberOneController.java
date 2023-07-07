@@ -12,17 +12,13 @@ import cash.model.MemberDao;
 import cash.vo.Member;
 
 @SuppressWarnings("serial")
-@WebServlet("/memberOne")
+@WebServlet("/on/memberOne")
 public class MemberOneController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 유효성 검사
+		// 로그인정보 저장
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		// 모델 값 구하기(Dao 메서드 호출)

@@ -18,17 +18,13 @@ import cash.vo.Hashtag;
 import cash.vo.Member;
 
 @SuppressWarnings("serial")
-@WebServlet("/addCashbook")
+@WebServlet("/on/addCashbook")
 public class AddCashbookController extends HttpServlet {
 	// 입력폼
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 유효성 검사
+		// 로그인정보 저장
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		// request 매개값
@@ -87,7 +83,7 @@ public class AddCashbookController extends HttpServlet {
 		// 입력 실패시
 		if(cashbookNo == 0) {
 			System.out.println("입력실패");
-			response.sendRedirect(request.getContextPath()+"/addCashbook?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDate="+targetDate);
+			response.sendRedirect(request.getContextPath()+"/on/addCashbook?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDate="+targetDate);
 			return;
 		}
 		// 입력 성공시 -> 해시태그가 있다면 -> 해시태그 추출 -> 해시태그 입력(반복)
@@ -117,6 +113,6 @@ public class AddCashbookController extends HttpServlet {
         }
 		
 		// redirect -> CalendarByDateController -> forward -> jsp
-		response.sendRedirect(request.getContextPath()+"/cashbook?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDate="+targetDate);
+		response.sendRedirect(request.getContextPath()+"/on/cashbook?targetYear="+targetYear+"&targetMonth="+targetMonth+"&targetDate="+targetDate);
 	}
 }
