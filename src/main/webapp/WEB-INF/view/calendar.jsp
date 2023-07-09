@@ -23,6 +23,21 @@
 		<div class="nav-underline"></div>
 	</nav>
 	<br>
+	<!-- 접속자 수  -->
+	<div style="display:inline-block; float: right;">
+		<div style="display: inline;">
+			현재접속자 : ${currentCounter} <!-- application.getAttribute("currentCounter") -->
+		</div>
+		&nbsp;
+		<div style="display: inline;">
+			오늘접속자 : ${counter} <!-- application.getAttribute("counter") -->
+		</div>
+		&nbsp;
+		<div style="display: inline;">
+			누적접속자 : ${totalCounter} <!-- application.getAttribute("totalCounter") -->
+		</div>
+	</div>
+	<br>
 	<div class="p-t-5">
 		<!-- targetMonth calendar -->
 		<h1 class="dis">${strTargetMonth} ${targetYear}</h1>

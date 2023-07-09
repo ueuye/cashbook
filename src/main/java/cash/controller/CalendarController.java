@@ -16,11 +16,12 @@ import cash.model.CashbookDao;
 import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 import cash.vo.Member;
+import service.CounterService;
 
 @SuppressWarnings("serial")
 @WebServlet("/on/calendar")
 public class CalendarController extends HttpServlet {
-       
+	private CounterService counterService = null;
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 로그인 정보 저장
@@ -123,6 +124,14 @@ public class CalendarController extends HttpServlet {
 		request.setAttribute("htList", htList);
 		
 		request.setAttribute("strTargetMonth", strTargetMonth);
+		
+		// 방문자수 
+		this.counterService = new CounterService();
+		int counter = counterService.getCounter();
+		int totalCounter = 	counterService.getCounterAll();
+		request.setAttribute("counter", counter);
+		request.setAttribute("totalCounter", totalCounter);
+
 		
 		// 달력을 출력하는 뷰
 		request.getRequestDispatcher("/WEB-INF/view/calendar.jsp").forward(request, response);
