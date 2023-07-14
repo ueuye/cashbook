@@ -8,27 +8,43 @@
 <head>
 <meta charset="UTF-8">
 <title>modifyMember.jsp</title>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
 </head>
 <body>
-	<div>
-		<a href="${pageContext.request.contextPath}/on/logout">로그아웃</a>
-		<a href="${pageContext.request.contextPath}/on/memberOne">이전</a>
+<div class="container w70">
+	<!-- navbar -->
+	<nav>
+		<a href="${pageContext.request.contextPath}/on/calendar">Calendar</a>
+		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
+		<a href="${pageContext.request.contextPath}/on/memberOne" class="is-current">MyPage</a>
+		<div class="nav-underline"></div>
+	</nav>
+	<br>
+	<div class="container conc">
+		<div class="p-t-5">
+			<h1>회원정보 수정</h1>
+		</div>
+		<br>
+		<form method="post" action="${pageContext.request.contextPath}/on/modifyMember">
+			<div class="shadow">
+				<table class="table table-bordered text-center">
+					<tr>
+						<td class="td03">아이디</td>
+						<td class="td03"><%=member.getMemberId() %></td>
+					</tr>
+					<tr>
+						<td class="td03">비밀번호</td>
+						<td class="td03"><input type="password" name="memberPw"></td>
+					</tr>
+				</table>
+			</div>
+			<button type="submit" class="btn btn-sm b03 cl02 dis_r_0">수정</button>
+		</form>	
 	</div>
-	
-	<h1>회원정보 수정</h1>
-	
-	<form method="post" action="${pageContext.request.contextPath}/on/modifyMember">
-		<table border="1">
-			<tr>
-				<td>아이디</td>
-				<td><%=member.getMemberId() %></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="memberPw"></td>
-			</tr>
-		</table>
-		<button type="submit">수정</button>
-	</form>
+</div>
 </body>
 </html>
