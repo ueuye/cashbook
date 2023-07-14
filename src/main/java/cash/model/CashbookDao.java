@@ -273,4 +273,106 @@ public class CashbookDao {
 		}		
 		return list;
 	}
+	
+	// 가계부 상세정보 출력
+	public Cashbook selectCashbookOne(int cashbookNo){
+		
+		Cashbook cashbook = new Cashbook();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT cashbook_no cashbookNo, category, price, memo "
+				+ "FROM cashbook "
+				+ "WHERE cashbook_no = ? ";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1,cashbookNo);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				cashbook.setCashbookNo(rs.getInt("cashbookNo"));
+				cashbook.setCategory(rs.getString("category"));
+				cashbook.setPrice(rs.getInt("price"));
+				cashbook.setMemo(rs.getString("memo"));
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}		
+		return cashbook;
+	}
+	
+	// 가계부 상세정보 수정
+	public int modifyCashbook(Cashbook cashbook) {
+		int row = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		String sql = "UPDATE cashbook SET category = ?, price = ?, memo = ? , updatedate=NOW() WHERE cashbook_no = ?";
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, cashbook.getCategory());
+			stmt.setInt(2, cashbook.getPrice());
+			stmt.setString(3, cashbook.getMemo());
+			stmt.setInt(4, cashbook.getCashbookNo());
+			
+			row = stmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
+	
+	// 가계부 삭제
+	public int removeCashbook(int cashbookNo) {
+		// 반환할 변수 생성
+		int row = 0;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		String sql = "DELETE FROM cashbook WHERE cashbook_no = ?";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cashbookNo);
+			row = stmt.executeUpdate();
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
 }

@@ -34,12 +34,16 @@
 			<th>카테고리</th>
 			<th>금액</th>
 			<th>메모</th>
+			<th>&nbsp;</th>
+			<th>&nbsp;</th>
 		</tr>
 		<c:forEach var="c" items="${list}">
 			<tr>
 				<td>${c.category }</td>
 				<td>${c.price }</td>
 				<td>${c.memo }</td>
+				<td><a href="${pageContext.request.contextPath}/on/modifyCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">수정</a></td>
+				<td><a href="${pageContext.request.contextPath}/on/removeCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">삭제</a></td>
 			</tr>		
 		</c:forEach>
 	</table>

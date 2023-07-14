@@ -80,4 +80,35 @@ public class HashtagDao {
 		
 		return;
 	}
+	
+	// 가계부 삭제시 해시태그 같이 삭제 
+	public int removeHashtag(int cashbookNo) {
+		// 반환할 변수 생성
+		int row = 0;
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		String sql = "DELETE FROM hashtag WHERE cashbook_no = ?";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cashbookNo);
+			row = stmt.executeUpdate();
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
 }
