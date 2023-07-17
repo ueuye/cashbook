@@ -26,14 +26,17 @@
 	<!-- 접속자 수  -->
 	<div style="display:inline-block; float: right;">
 		<div style="display: inline;">
+			<img src="${pageContext.request.contextPath}/css/img/admin1.png" alt="IMG" style="width:15px; height:15px;">
 			현재접속자 : ${currentCounter} <!-- application.getAttribute("currentCounter") -->
 		</div>
 		&nbsp;
 		<div style="display: inline;">
+			<img src="${pageContext.request.contextPath}/css/img/admin2.png" alt="IMG" style="width:15px; height:15px;">
 			오늘접속자 : ${counter} <!-- application.getAttribute("counter") -->
 		</div>
 		&nbsp;
 		<div style="display: inline;">
+			<img src="${pageContext.request.contextPath}/css/img/admin2.png" alt="IMG" style="width:15px; height:15px;">
 			누적접속자 : ${totalCounter} <!-- application.getAttribute("totalCounter") -->
 		</div>
 	</div>
