@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.bn {
+	border:none;
+}
 /*********** 중앙정렬 컨테이너 ***********/
 .conc {
 	width:50%; 
@@ -40,11 +43,20 @@
 .p-t-5 {
 	padding-top: 5px;
 }
+.p-t-10 {
+	padding-top: 10px;
+}
+.p-t-70 {
+	padding-top: 70px;
+}
 .p-b-5 {
 	padding-bottom: 5px;
 }
 .p-b-10 {
 	padding-bottom: 10px;
+}
+.p-b-30 {
+	padding-bottom: 30px;
 }
 /*********** background ***********/
 .b01 {
@@ -64,6 +76,13 @@
 	margin-left:7px;
 	box-shadow: 2px 2px 2px gray;
 }
+.b04 {
+	width:150px;
+	height:40px;
+	background:#D97F89;
+	margin-left:7px;
+	box-shadow: 2px 2px 2px gray;
+}
 /*********** text-color ***********/
 .cl01 {
 	color:#D97F89;
@@ -76,6 +95,10 @@
 }
 .cl04 {
 	color:#5D5D5D;
+}
+/*********** text-size ***********/
+.ts01{
+	font-size: 17px;
 }
 /*********** text-align ***********/
 .t-r {
@@ -93,6 +116,11 @@
 .dis_r_0 {
 	float: right;
 }
+.dis_c {
+	display: flex; 
+	justify-content: center;	
+}
+
 /*********** table ***********/
 .table th {
 	background-color:#D97F89;
@@ -112,11 +140,17 @@
 	height:60px; 
 	vertical-align: middle;
 }
+.td04 {
+	height:50px; 
+	vertical-align: middle;
+}
 /*********** size ***********/
 .w70 {
 	width:70%
 }
-
+.w85 {
+	width:85%
+}
 /*********** pagination ***********/
 .page_wrap {
 	text-align:center;

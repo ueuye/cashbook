@@ -19,14 +19,14 @@
 	<!-- navbar -->
 	<nav>
 		<a href="${pageContext.request.contextPath}/on/calendar">Calendar</a>
-		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
 		<a href="${pageContext.request.contextPath}/on/memberOne" class="is-current">MyPage</a>
+		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
 		<div class="nav-underline"></div>
 	</nav>
 	<br>
 	<div class="container conc">
 		<div class="p-t-5">
-			<h1 class="dis">회원상세정보</h1>
+			<h1 class="dis">회원정보</h1>
 			<div class="dis_r">
 				<a class="btn btn-sm b03 cl02 dis" href="${pageContext.request.contextPath}/on/modifyMember">회원정보수정</a>
 				<a class="btn btn-sm b03 cl02 dis" href="${pageContext.request.contextPath}/on/removeMember">회원정보탈퇴</a>

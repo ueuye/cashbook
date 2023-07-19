@@ -15,14 +15,15 @@
 <div class="container w70">
 	<!-- navbar -->
 	<nav>
-		<a href="#" class="is-current">HashTag</a>
 		<a href="${pageContext.request.contextPath}/on/calendar">Calendar</a>
-		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
+		<a href="#" class="is-current">HashTag</a>
 		<a href="${pageContext.request.contextPath}/on/memberOne">MyPage</a>
+		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
 		<div class="nav-underline"></div>
 	</nav>
 	<br>
-	<h2 class="cl01 p-b-10"># ${word}</h2>
+	<div class="container w85 p-t-70">
+		<h2 class="cl01 p-b-10"># ${word}</h2>
 		<table border="1" class="table text-center">
 			<thead>
 				<tr>
@@ -35,11 +36,11 @@
 			</thead>
 			<c:forEach var="l" items="${list }">
 				<tr class="td01">
-					<td>${l.cashbookNo }</td>
-					<td>${l.category }</td>
-					<td>${l.price }</td>
-					<td>${l.cashbookDate }</td>
-					<td>${l.memo }</td>
+					<td class="td04">${l.cashbookNo }</td>
+					<td class="td04">${l.category }</td>
+					<td class="td04">${l.price }</td>
+					<td class="td04">${l.cashbookDate }</td>
+					<td class="td04">${l.memo }</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -64,7 +65,8 @@
 					<a class="arrow next" href="${pageContext.request.contextPath}/on/cashbookListByTag?currentPage=${startPage+pagePerPage}&word=${word}"></a>
 				</c:if>
 			</div>
-		</div>	
-	</div>
+		</div>
+	</div>	
+</div>
 </body>
 </html>

@@ -15,38 +15,37 @@
 <div class="container w70">
 	<!-- navbar -->
 	<nav>
-		<a href="#" class="is-current">Cashbook</a>
 		<a href="${pageContext.request.contextPath}/on/calendar">Calendar</a>
-		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
+		<a href="#" class="is-current">Cashbook</a>
 		<a href="${pageContext.request.contextPath}/on/memberOne">MyPage</a>
+		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
 		<div class="nav-underline"></div>
 	</nav>
 	<br>
-	<div class="p-t-5">
+	<div class="container w85 p-t-70">
 		<h2 class="dis">${targetYear}년 ${targetMonth+1}월 ${targetDate}일</h2>
-		<div class="dis_r">
+		<div class="dis_r p-b-30">
 			<a class="btn b03 cl02 dis" href="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">추가</a>
 		</div>
-	</div>
-	<br>
-	<table border="1" class="table text-center shadow">
-		<tr>
-			<th>카테고리</th>
-			<th>금액</th>
-			<th>메모</th>
-			<th>&nbsp;</th>
-			<th>&nbsp;</th>
-		</tr>
-		<c:forEach var="c" items="${list}">
+		<table border="1" class="table text-center shadow">
 			<tr>
-				<td>${c.category }</td>
-				<td>${c.price }</td>
-				<td>${c.memo }</td>
-				<td><a href="${pageContext.request.contextPath}/on/modifyCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">수정</a></td>
-				<td><a href="${pageContext.request.contextPath}/on/removeCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">삭제</a></td>
-			</tr>		
-		</c:forEach>
-	</table>
+				<th>카테고리</th>
+				<th>금액</th>
+				<th>메모</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+			</tr>
+			<c:forEach var="c" items="${list}">
+				<tr>
+					<td class="td04">${c.category }</td>
+					<td class="td04">${c.price }</td>
+					<td class="td04">${c.memo }</td>
+					<td class="td04"><a class="an cl01" href="${pageContext.request.contextPath}/on/modifyCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">수정</a></td>
+					<td class="td04"><a class="an cl01" href="${pageContext.request.contextPath}/on/removeCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">삭제</a></td>
+				</tr>		
+			</c:forEach>
+		</table>
+	</div>
 </div>
 </body>
 </html>
