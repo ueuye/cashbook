@@ -174,4 +174,35 @@ public class MemberDao {
 		
 		return returnMember;
 	}
+	
+	//아이디 중복검사
+	public int idCheck(String memberId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM member WHERE member_id = ?";
+		
+		int idCount = 0;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				idCount = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+			} catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+		return idCount;
+	}
 }

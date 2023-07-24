@@ -5,9 +5,46 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+// id 중복검사
+$(document).ready(function(){
+	// 시작시 id입력폼에 포커스
+	$('#login-username').focus();
+	
+	$('#login-username').blur(function() { 
+		$.ajax({
+	          url : "./idCk",
+	          data : {memberId: $("#login-username").val()},
+	          type : "post",
+	          success : function(param){
+	             console.log(param);
+	             if(param == 0){ //true인 경우 (아이디 사용 가능한 경우)
+	                $("#idValMsg").text("사용 가능한 아이디입니다");
+	                $('#login-password').focus();
+	             } else { //false인 경우
+	                $("#idValMsg").text("! 이미 사용 중인 아이디입니다");
+	                $("#login-username").val("");
+	                $('#login-username').focus();
+	             } 
+	          },
+		});
+	});
+	
+	$('#btn').click(function(){
+		if($('#login-username').val() == ''){
+			alert('아이디를 입력해주세요');
+		}else if($('#login-password').val() == ''){
+			alert('비밀번호를 입력해주세요');
+		}else {
+			$('#addMember').submit();
+		}
+	});
+ })
+</script>
 </head>
 <body>
-<form class="form" method="post" action="${pageContext.request.contextPath}/off/addMember">
+<form class="form" method="post" action="${pageContext.request.contextPath}/off/addMember" id="addMember">
 	<div class="form-inner">
 		<h2>Sign Up</h2>
 		<div class="input-wrapper">
@@ -21,7 +58,7 @@
 				<input type="text" id="login-username" name="memberId" data-lpignore="true">
 			</div>
 		</div>
-
+		<span class="cl05" id="idValMsg"></span>
 		<div class="input-wrapper">
 			<label for="login-password">Password</label>
 			<div class="input-group">
@@ -35,7 +72,7 @@
 		</div>
 
 		<div class="btn-group">
-			<button class="btn btn—primary" type="submit">Sign up</button>
+			<button class="btn btn—primary" id="btn" type="button">Sign up</button>
 			<a class="btn—text" href="${pageContext.request.contextPath}/off/login">sign in</a>
 		</div>
 	</div>
