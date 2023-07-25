@@ -36,6 +36,7 @@ public class ModifyMemberController extends HttpServlet {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
 		// 요청값 변수에 저장
+		String currentPw = request.getParameter("currentPw");
 		String memberPw = request.getParameter("memberPw");
 				
 		Member member = new Member();
@@ -45,7 +46,7 @@ public class ModifyMemberController extends HttpServlet {
 		// Dao호출
 		MemberDao memberDao = new MemberDao();
 				
-		int row = memberDao.modifyMember(member);
+		int row = memberDao.modifyMember(member,currentPw);
 		if(row == 1) { // 회원정보수정 성공
 			// memberOne.jsp view를 이동하는 controller를 리다이렉트
 			response.sendRedirect(request.getContextPath()+"/on/memberOne");

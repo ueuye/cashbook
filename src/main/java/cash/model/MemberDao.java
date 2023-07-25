@@ -6,14 +6,14 @@ import cash.vo.Member;
 
 public class MemberDao {
 	// 회원정보수정
-	public int modifyMember(Member member) {
+	public int modifyMember(Member member, String currentPw) {
 		// 반환할 변수 생성
 		int row = 0;
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
-		String sql = "UPDATE member SET member_pw = PASSWORD(?) , updatedate = NOW() WHERE member_id = ?";
+		String sql = "UPDATE member SET member_pw = PASSWORD(?) , updatedate = NOW() WHERE member_id = ? and member_pw = PASSWORD(?)";
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
@@ -21,6 +21,7 @@ public class MemberDao {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,member.getMemberPw());
 			stmt.setString(2,member.getMemberId());
+			stmt.setString(3,currentPw);
 			row = stmt.executeUpdate();
 			
 		} catch (Exception e1) {
