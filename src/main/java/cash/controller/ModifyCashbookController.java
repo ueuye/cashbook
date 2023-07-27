@@ -53,7 +53,7 @@ public class ModifyCashbookController extends HttpServlet {
 		Cashbook cashbook = new Cashbook();
 		cashbook.setCashbookNo(cashbookNo);
 		cashbook.setCategory(category);
-		cashbook.setCategory(subcategory);
+		cashbook.setSubcategory(subcategory);
 		cashbook.setPrice(price);
 		cashbook.setMemo(memo);
 		

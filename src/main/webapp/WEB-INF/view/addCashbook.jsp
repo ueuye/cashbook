@@ -84,7 +84,7 @@
 					<tr><!-- 대분류 -->
 						<td class="td03">카테고리</td>
 						<td class="td03 dis_c">
-			                <select name ="category" id="category" class="text-center">
+			                <select name ="category" id="category" class="text-center bn">
 			            		<option value="">==메인 카테고리==</option> 
 			            		<option value="수입">수입</option>
 			           			<option value="지출">지출</option>
@@ -94,7 +94,7 @@
 					<tr><!-- 소분류 -->
 						<td class="td03">서브 카테고리</td>
 						<td class="td03 dis_c">
-			                <select name ="subcategory" id="subcategory" class="text-center">
+			                <select name ="subcategory" id="subcategory" class="text-center bn">
 			            		<option value="">==서브 카테고리==</option>
 			                </select>
 			            </td>

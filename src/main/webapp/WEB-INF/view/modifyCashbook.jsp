@@ -14,11 +14,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <script>
-	// 입력폼 유효성 검사
 	$(document).ready(function(){
+		// 카테고리선택시 서브카테고리 리스트 출력
+		$('#category').change(function(){ // 대분류가 변경되었을때
+			if($('#category').val() == '') {
+				$('#subcategory').empty();
+				$('#subcategory').append('<option value="">==서브 카테고리==</option>');
+			} else{
+				$.ajax({
+					url:'${pageContext.request.contextPath}/on/category',
+					type:'get',
+					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+					data:{category: $('#category').val() },
+					dataType: 'json',
+					success:function(param){
+						console.log(param);
+						$('#subcategory').empty();
+						$('#subcategory').append('<option value="">==서브 카테고리==</option>');
+						// param을 subcategory 추가
+						$(param).each(function(index, item){
+							let str = '<option value="'+item+'">'+item+'</option>';
+							$('#subcategory').append(str);                     
+						});
+					},
+				});
+			}
+		});
+		// 입력폼 유효성 검사
 		$('#btn').click(function(){
-			if($('#category').val() == '==선택하세요=='){
+			if($('#category').val() == ''){
 				alert('카테고리를 입력해주세요');
+			}else if($('#subcategory').val() == ''){
+				alert('서브카테고리를 입력해주세요');
 			}else if($('#price').val() == ''){
 				alert('금액을 입력해주세요');
 			}else if($('#memo').val() == ''){
@@ -51,20 +78,99 @@
 						<td class="td03">날짜</td>
 						<td class="td03 dis_c"><input class="text-center bn" type="text" value="${targetYear}년 ${targetMonth+1}월 ${targetDate}일" readonly="readonly"></td>
 					</tr>
-					<tr>
+					<tr><!-- 대분류 -->
 						<td class="td03">카테고리</td>
 						<td class="td03 dis_c">
 			                <select id="category" name ="category" class="text-center bn">
 				                <c:if test="${cashbook.category eq '수입' }">
-				                	<option>==선택하세요==</option> 
+				                	<option value="">==메인 카테고리==</option> 
 				            		<option value="수입" selected="selected">수입</option>
 				           			<option value="지출">지출</option>
 				                </c:if>
 				                <c:if test="${cashbook.category eq '지출'}">
-				                	<option>==선택하세요==</option> 
+				                	<option value="">==메인 카테고리==</option> 
 				            		<option value="수입">수입</option>
 				           			<option value="지출" selected="selected">지출</option>
 				                </c:if>
+			                </select>
+			            </td>
+					</tr>
+					<tr><!-- 소분류 -->
+						<td class="td03">서브 카테고리</td>
+						<td class="td03 dis_c">
+			                <select name ="subcategory" id="subcategory" class="text-center bn">
+			               		<c:if test="${cashbook.subcategory eq '월급' }">
+									<option value="">==서브 카테고리==</option>	
+									<option value="월급" selected="selected">월급</option>
+				           			<option value="용돈">용돈</option>
+				           			<option value="주식">주식</option>
+				           			<option value="기타">기타</option>		               		
+			               		</c:if>
+			               		<c:if test="${cashbook.subcategory eq '용돈' }">
+									<option value="">==서브 카테고리==</option>	
+									<option value="월급">월급</option>
+				           			<option value="용돈" selected="selected">용돈</option>
+				           			<option value="주식">주식</option>
+				           			<option value="기타">기타</option>		               		
+			               		</c:if>
+			               		<c:if test="${cashbook.subcategory eq '주식' }">
+									<option value="">==서브 카테고리==</option>	
+									<option value="월급">월급</option>
+				           			<option value="용돈">용돈</option>
+				           			<option value="주식" selected="selected">주식</option>
+				           			<option value="기타">기타</option>		               		
+			               		</c:if>
+			               		<c:if test="${cashbook.category eq '수입' }">
+									<c:if test="${cashbook.subcategory eq '기타' }">
+										<option value="">==서브 카테고리==</option>	
+										<option value="월급">월급</option>
+					           			<option value="용돈">용돈</option>
+					           			<option value="주식">주식</option>
+					           			<option value="기타" selected="selected">기타</option>		               		
+				               		</c:if>			               		
+			               		</c:if>
+			               		<c:if test="${cashbook.subcategory eq '식비' }">
+									<option value="">==서브 카테고리==</option>	
+									<option value="식비" selected="selected">식비</option>
+				           			<option value="교통비">교통비</option>
+				           			<option value="쇼핑">쇼핑</option>
+				           			<option value="저축">저축</option>
+				           			<option value="기타">기타</option>		               		
+			               		</c:if>
+			               		<c:if test="${cashbook.subcategory eq '교통비' }">
+									<option value="">==서브 카테고리==</option>	
+									<option value="식비">식비</option>
+				           			<option value="교통비" selected="selected">교통비</option>
+				           			<option value="쇼핑">쇼핑</option>
+				           			<option value="저축">저축</option>
+				           			<option value="기타">기타</option>		               		
+			               		</c:if>
+			               		<c:if test="${cashbook.subcategory eq '쇼핑' }">
+									<option value="">==서브 카테고리==</option>	
+									<option value="식비">식비</option>
+				           			<option value="교통비">교통비</option>
+				           			<option value="쇼핑" selected="selected">쇼핑</option>
+				           			<option value="저축">저축</option>
+				           			<option value="기타">기타</option>		               		
+			               		</c:if>
+			               		<c:if test="${cashbook.subcategory eq '저축' }">
+									<option value="">==서브 카테고리==</option>	
+									<option value="식비">식비</option>
+				           			<option value="교통비">교통비</option>
+				           			<option value="쇼핑">쇼핑</option>
+				           			<option value="저축" selected="selected">저축</option>
+				           			<option value="기타">기타</option>		               		
+			               		</c:if>
+			               		<c:if test="${cashbook.category eq '지출' }">
+			               			<c:if test="${cashbook.subcategory eq '기타' }">
+										<option value="">==서브 카테고리==</option>	
+										<option value="식비">식비</option>
+					           			<option value="교통비">교통비</option>
+					           			<option value="쇼핑">쇼핑</option>
+					           			<option value="저축">저축</option>
+					           			<option value="기타" selected="selected">기타</option>		               		
+			               			</c:if>
+			               		</c:if>
 			                </select>
 			            </td>
 					</tr>
