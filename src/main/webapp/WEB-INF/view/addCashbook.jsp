@@ -12,11 +12,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <script>
-	// 입력폼 유효성 검사
 	$(document).ready(function(){
+		// 카테고리선택시 서브카테고리 리스트 출력
+		$('#category').change(function(){ // 대분류가 변경되었을때
+	         if($('#category').val() == '') {
+	            $('#subcategory').empty();
+	          	$('#subcategory').append('<option value="">==서브 카테고리==</option>');
+	         } else{
+	  			$.ajax({
+	               url:'${pageContext.request.contextPath}/on/category',
+	               type:'get',
+	               contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	               data:{category: $('#category').val() },
+	               dataType: 'json',
+	               success:function(param){
+	            	   console.log(param);
+	            	   $('#subcategory').empty();
+	   	          	   $('#subcategory').append('<option value="">==서브 카테고리==</option>');
+	                  // param을 subcategory 추가
+	                  $(param).each(function(index, item){
+	                     let str = '<option value="'+item+'">'+item+'</option>';
+	                     $('#subcategory').append(str);                     
+	                  });
+	               },
+	            });
+	         }
+	      });
+		
+		// 입력폼 유효성 검사
 		$('#btn').click(function(){
-			if($('#category').val() == '==선택하세요=='){
+			if($('#category').val() == ''){
 				alert('카테고리를 입력해주세요');
+			}else if($('#subcategory').val() == ''){
+				alert('서브카테고리를 입력해주세요');
 			}else if($('#price').val() == ''){
 				alert('금액을 입력해주세요');
 			}else if($('#memo').val() == ''){
@@ -25,6 +53,7 @@
 				$('#addCashbook').submit();
 			}
 		});
+		
 	});
 </script>
 <body>
@@ -52,13 +81,21 @@
 						<td class="td03">날짜</td>
 						<td class="td03 dis_c"><input class="text-center bn" type="text" value="${targetYear}년 ${targetMonth+1}월 ${targetDate}일" readonly="readonly"></td>
 					</tr>
-					<tr>
+					<tr><!-- 대분류 -->
 						<td class="td03">카테고리</td>
 						<td class="td03 dis_c">
-			                <select name ="category" id="category">
-			            		<option>==선택하세요==</option> 
+			                <select name ="category" id="category" class="text-center">
+			            		<option value="">==메인 카테고리==</option> 
 			            		<option value="수입">수입</option>
 			           			<option value="지출">지출</option>
+			                </select>
+			            </td>
+					</tr>
+					<tr><!-- 소분류 -->
+						<td class="td03">서브 카테고리</td>
+						<td class="td03 dis_c">
+			                <select name ="subcategory" id="subcategory" class="text-center">
+			            		<option value="">==서브 카테고리==</option>
 			                </select>
 			            </td>
 					</tr>
