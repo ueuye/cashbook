@@ -30,6 +30,7 @@
 		<table border="1" class="table text-center shadow">
 			<tr>
 				<th>카테고리</th>
+				<th>서브 카테고리</th>
 				<th>금액</th>
 				<th>메모</th>
 				<th>&nbsp;</th>
@@ -38,6 +39,7 @@
 			<c:forEach var="c" items="${list}">
 				<tr>
 					<td class="td04">${c.category }</td>
+					<td class="td04">${c.subcategory }</td>
 					<td class="td04">${c.price }</td>
 					<td class="td04">${c.memo }</td>
 					<td class="td04"><a class="an cl01" href="${pageContext.request.contextPath}/on/modifyCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">수정</a></td>

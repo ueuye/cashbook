@@ -4,6 +4,7 @@ public class Cashbook {
 	private int cashbookNo;
 	private String memberId;
 	private String category;
+	private String subcategory;
 	private String cashbookDate;
 	private int price;
 	private String memo;
@@ -16,12 +17,13 @@ public class Cashbook {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Cashbook(int cashbookNo, String memberId, String category, String cashbookDate, int price, String memo,
-			String updatedate, String createdate, String sumPrice) {
+	public Cashbook(int cashbookNo, String memberId, String category, String subcategory, String cashbookDate,
+			int price, String memo, String updatedate, String createdate, String sumPrice) {
 		super();
 		this.cashbookNo = cashbookNo;
 		this.memberId = memberId;
 		this.category = category;
+		this.subcategory = subcategory;
 		this.cashbookDate = cashbookDate;
 		this.price = price;
 		this.memo = memo;
@@ -29,12 +31,12 @@ public class Cashbook {
 		this.createdate = createdate;
 		this.sumPrice = sumPrice;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Cashbook [cashbookNo=" + cashbookNo + ", memberId=" + memberId + ", category=" + category
-				+ ", cashbookDate=" + cashbookDate + ", price=" + price + ", memo=" + memo + ", updatedate="
-				+ updatedate + ", createdate=" + createdate + ", sumPrice=" + sumPrice + "]";
+				+ ", subcategory=" + subcategory + ", cashbookDate=" + cashbookDate + ", price=" + price + ", memo="
+				+ memo + ", updatedate=" + updatedate + ", createdate=" + createdate + ", sumPrice=" + sumPrice + "]";
 	}
 
 	
@@ -61,7 +63,14 @@ public class Cashbook {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	public String getSubcategory() {
+		return subcategory;
+	}
 
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
 	public String getCashbookDate() {
 		return cashbookDate;
 	}
@@ -109,6 +118,5 @@ public class Cashbook {
 	public void setSumPrice(String sumPrice) {
 		this.sumPrice = sumPrice;
 	}
-	
 
 }

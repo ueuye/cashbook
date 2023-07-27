@@ -23,14 +23,15 @@ public class CashbookDao {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			String sql = "INSERT INTO "
-					+ "cashbook(member_id, category, cashbook_date, price, memo, updatedate, createdate)"
-					+ "VALUES(?,?,?,?,?,NOW(),NOW())";
+					+ "cashbook(member_id, category, subcategory, cashbook_date, price, memo, updatedate, createdate)"
+					+ "VALUES(?,?,?,?,?,?,NOW(),NOW())";
 			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,cashbook.getMemberId());
 			stmt.setString(2, cashbook.getCategory());
-			stmt.setString(3, cashbook.getCashbookDate());
-			stmt.setInt(4, cashbook.getPrice());
-			stmt.setString(5, cashbook.getMemo());
+			stmt.setString(3, cashbook.getSubcategory());
+			stmt.setString(4, cashbook.getCashbookDate());
+			stmt.setInt(5, cashbook.getPrice());
+			stmt.setString(6, cashbook.getMemo());
 			
 			stmt.executeUpdate();
 			
@@ -60,7 +61,7 @@ public class CashbookDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT c.cashbook_no cashbookNo, c.category category, c.price price, c.cashbook_date cashbookDate, c.memo memo "
+		String sql = "SELECT c.cashbook_no cashbookNo, c.category category, c.subcategory subcategory, c.price price, c.cashbook_date cashbookDate, c.memo memo "
 				+ "FROM cashbook c INNER JOIN hashtag h "
 				+ "ON c.cashbook_no = h.cashbook_no "
 				+ "WHERE c.member_id = ? AND h.word = ? "
@@ -80,6 +81,7 @@ public class CashbookDao {
 				Cashbook c = new Cashbook();
 				c.setCashbookNo(rs.getInt("cashbookNo"));
 				c.setCategory(rs.getString("category"));
+				c.setSubcategory(rs.getString("subcategory"));
 				c.setPrice(rs.getInt("price"));
 				c.setCashbookDate(rs.getString("cashbookDate"));
 				c.setMemo(rs.getString("memo"));
@@ -146,7 +148,7 @@ public class CashbookDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT cashbook_no cashbookNo, category, price, cashbook_date cashbookDate "
+		String sql = "SELECT cashbook_no cashbookNo, category, subcategory, price, cashbook_date cashbookDate "
 				+ "FROM cashbook "
 				+ "WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? "
 				+ "ORDER BY cashbook_date ASC";
@@ -163,6 +165,7 @@ public class CashbookDao {
 				Cashbook c = new Cashbook();
 				c.setCashbookNo(rs.getInt("cashbookNo"));
 				c.setCategory(rs.getString("category"));
+				c.setSubcategory(rs.getString("subcategory"));
 				c.setPrice(rs.getInt("price"));
 				c.setCashbookDate(rs.getString("cashbookDate"));
 				list.add(c);
@@ -238,7 +241,7 @@ public class CashbookDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT cashbook_no cashbookNo, category, price, memo "
+		String sql = "SELECT cashbook_no cashbookNo, category, subcategory, price, memo "
 				+ "FROM cashbook "
 				+ "WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? AND DAY(cashbook_date) = ? "
 				+ "ORDER BY cashbook_date ASC";
@@ -256,6 +259,7 @@ public class CashbookDao {
 				Cashbook c = new Cashbook();
 				c.setCashbookNo(rs.getInt("cashbookNo"));
 				c.setCategory(rs.getString("category"));
+				c.setSubcategory(rs.getString("subcategory"));
 				c.setPrice(rs.getInt("price"));
 				c.setMemo(rs.getString("memo"));
 				list.add(c);
@@ -282,7 +286,7 @@ public class CashbookDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT cashbook_no cashbookNo, category, price, memo "
+		String sql = "SELECT cashbook_no cashbookNo, category, subcategory, price, memo "
 				+ "FROM cashbook "
 				+ "WHERE cashbook_no = ? ";
 		
@@ -295,6 +299,7 @@ public class CashbookDao {
 			if(rs.next()) {
 				cashbook.setCashbookNo(rs.getInt("cashbookNo"));
 				cashbook.setCategory(rs.getString("category"));
+				cashbook.setSubcategory(rs.getString("subcategory"));
 				cashbook.setPrice(rs.getInt("price"));
 				cashbook.setMemo(rs.getString("memo"));
 			}
@@ -318,16 +323,17 @@ public class CashbookDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
-		String sql = "UPDATE cashbook SET category = ?, price = ?, memo = ? , updatedate=NOW() WHERE cashbook_no = ?";
+		String sql = "UPDATE cashbook SET category = ?, subcategory=?, price = ?, memo = ? , updatedate=NOW() WHERE cashbook_no = ?";
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, cashbook.getCategory());
-			stmt.setInt(2, cashbook.getPrice());
-			stmt.setString(3, cashbook.getMemo());
-			stmt.setInt(4, cashbook.getCashbookNo());
+			stmt.setString(2, cashbook.getSubcategory());
+			stmt.setInt(3, cashbook.getPrice());
+			stmt.setString(4, cashbook.getMemo());
+			stmt.setInt(5, cashbook.getCashbookNo());
 			
 			row = stmt.executeUpdate();
 			

@@ -67,6 +67,7 @@ public class AddCashbookController extends HttpServlet {
 		String memberId = request.getParameter("memberId");
 		String cashbookDate = request.getParameter("cashbookDate");
 		String category = request.getParameter("category");
+		String subcategory = request.getParameter("subcategory");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String memo = request.getParameter("memo");
 		
@@ -75,6 +76,7 @@ public class AddCashbookController extends HttpServlet {
 		cashbook.setMemberId(memberId);
 		cashbook.setCashbookDate(cashbookDate);
 		cashbook.setCategory(category);
+		cashbook.setSubcategory(subcategory);
 		cashbook.setPrice(price);
 		cashbook.setMemo(memo);
 		

@@ -46,12 +46,14 @@ public class ModifyCashbookController extends HttpServlet {
 		
 		int cashbookNo = Integer.parseInt(request.getParameter("cashbookNo"));
 		String category = request.getParameter("category");
+		String subcategory = request.getParameter("subcategory");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String memo = request.getParameter("memo");
 		
 		Cashbook cashbook = new Cashbook();
 		cashbook.setCashbookNo(cashbookNo);
 		cashbook.setCategory(category);
+		cashbook.setCategory(subcategory);
 		cashbook.setPrice(price);
 		cashbook.setMemo(memo);
 		

@@ -29,6 +29,7 @@
 				<tr>
 					<th>번호</th>
 					<th>카테고리</th>
+					<th>서브 카테고리</th>
 					<th>금액</th>
 					<th>날짜</th>
 					<th>메모</th>
@@ -38,6 +39,7 @@
 				<tr class="td01">
 					<td class="td04">${l.cashbookNo }</td>
 					<td class="td04">${l.category }</td>
+					<td class="td04">${l.subcategory }</td>
 					<td class="td04">${l.price }</td>
 					<td class="td04">${l.cashbookDate }</td>
 					<td class="td04">${l.memo }</td>
