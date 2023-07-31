@@ -61,6 +61,7 @@
 	<!-- navbar -->
 	<nav>
 		<a href="${pageContext.request.contextPath}/on/calendar">Calendar</a>
+		<a href="${pageContext.request.contextPath}/on/cashbookChart">Chart</a>
 		<a href="${pageContext.request.contextPath}/on/cashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}" class="is-current">Cashbook</a>
 		<a href="${pageContext.request.contextPath}/on/memberOne">MyPage</a>
 		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>

@@ -52,7 +52,34 @@ public class CashbookChartController extends HttpServlet {
 		Calendar today = Calendar.getInstance();
 		int todayYear = today.get(Calendar.YEAR);
 		int todayMonth = today.get(Calendar.MONTH);
-				
+		
+		// targetMonth 영문으로 변환
+		String strTargetMonth = null;
+		if(targetMonth == 0) {
+			strTargetMonth = "January";
+		}else if(targetMonth == 1) {
+			strTargetMonth = "February";
+		}else if(targetMonth == 2) {
+			strTargetMonth = "March";
+		}else if(targetMonth == 3) {
+			strTargetMonth = "April";
+		}else if(targetMonth == 4) {
+			strTargetMonth = "May";
+		}else if(targetMonth == 5) {
+			strTargetMonth = "June";
+		}else if(targetMonth == 6) {
+			strTargetMonth = "July";
+		}else if(targetMonth == 7) {
+			strTargetMonth = "August";
+		}else if(targetMonth == 8) {
+			strTargetMonth = "September";
+		}else if(targetMonth == 9) {
+			strTargetMonth = "October";
+		}else if(targetMonth == 10) {
+			strTargetMonth = "November";
+		}else {
+			strTargetMonth = "December";
+		}
 		
 		request.setAttribute("memberId", memberId);
 		request.setAttribute("targetYear", targetYear);
@@ -61,6 +88,8 @@ public class CashbookChartController extends HttpServlet {
 		request.setAttribute("today", today);
 		request.setAttribute("todayYear", todayYear);
 		request.setAttribute("todayMonth", todayMonth);
+		
+		request.setAttribute("strTargetMonth", strTargetMonth);
 		
 		request.getRequestDispatcher("/WEB-INF/view/cashbookChart.jsp").forward(request,response);
 		

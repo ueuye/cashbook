@@ -18,8 +18,8 @@
 	<!-- navbar -->
 	<nav>
 		<a href="${pageContext.request.contextPath}/on/calendar" class="is-current">Calendar</a>
-		<a href="${pageContext.request.contextPath}/on/memberOne">MyPage</a>
 		<a href="${pageContext.request.contextPath}/on/cashbookChart?targetYear=${targetYear}&targetMonth=${targetMonth}">Chart</a>
+		<a href="${pageContext.request.contextPath}/on/memberOne">MyPage</a>
 		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
 		<div class="nav-underline"></div>
 	</nav>

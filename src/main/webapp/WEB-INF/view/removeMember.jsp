@@ -28,6 +28,7 @@
 	<!-- navbar -->
 	<nav>
 		<a href="${pageContext.request.contextPath}/on/calendar">Calendar</a>
+		<a href="${pageContext.request.contextPath}/on/cashbookChart">Chart</a>
 		<a href="${pageContext.request.contextPath}/on/memberOne" class="is-current">MyPage</a>
 		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
 		<div class="nav-underline"></div>

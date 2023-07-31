@@ -420,5 +420,88 @@ public class CashbookDao {
 		}		
 		return list;
 	}
+	
+	// 월, 카테고리별 소비현황
+	public List<Map<String, Object>> monthCateSum(String memberId, int targetYear, int targetMonth){
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		
+		String sql = "SELECT subcategory, sum(price) sum FROM cashbook WHERE category='지출' AND member_id=? AND YEAR(cashbook_date)=? AND MONTH(cashbook_date)=? GROUP BY subcategory";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1,memberId);
+			stmt.setInt(2,targetYear);
+			stmt.setInt(3,targetMonth);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("subcategory", rs.getString("subcategory"));
+				map.put("sum", rs.getInt("sum"));
+				list.add(map);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}		
+		return list;
+	}
+	
+	// 최근 3개월 지출 현황
+	public List<Map<String, Object>> threeMonthSum(String memberId, int targetYear, int targetMonth){
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT MONTH(cashbook_date) month, sum(price) sum FROM cashbook WHERE category='지출' AND member_id=? AND YEAR(cashbook_date)=? AND MONTH(cashbook_date)=? "
+				+ "UNION "
+				+ "SELECT MONTH(cashbook_date) month, sum(price) sum FROM cashbook WHERE category='지출' AND member_id=? AND YEAR(cashbook_date)=? AND MONTH(cashbook_date)=? "
+				+ "UNION "
+				+ "SELECT MONTH(cashbook_date) month, sum(price) sum FROM cashbook WHERE category='지출' AND member_id=? AND YEAR(cashbook_date)=? AND MONTH(cashbook_date)=?";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1,memberId);
+			stmt.setInt(2,targetYear);
+			stmt.setInt(3,targetMonth-2);
+			stmt.setString(4,memberId);
+			stmt.setInt(5,targetYear);
+			stmt.setInt(6,targetMonth-1);
+			stmt.setString(7,memberId);
+			stmt.setInt(8,targetYear);
+			stmt.setInt(9,targetMonth);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("month", rs.getString("month"));
+				map.put("sum", rs.getInt("sum"));
+				list.add(map);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}		
+		return list;
+	}	
 }

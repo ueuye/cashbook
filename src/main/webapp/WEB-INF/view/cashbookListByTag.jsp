@@ -16,6 +16,7 @@
 	<!-- navbar -->
 	<nav>
 		<a href="${pageContext.request.contextPath}/on/calendar">Calendar</a>
+		<a href="${pageContext.request.contextPath}/on/cashbookChart">Chart</a>
 		<a href="#" class="is-current">HashTag</a>
 		<a href="${pageContext.request.contextPath}/on/memberOne">MyPage</a>
 		<a href="${pageContext.request.contextPath}/on/logout">Logout</a>
