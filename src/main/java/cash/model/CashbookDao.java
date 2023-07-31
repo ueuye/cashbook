@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cash.vo.Cashbook;
 
@@ -381,4 +383,42 @@ public class CashbookDao {
 		
 		return row;
 	}
+	
+	// 월별 총 수입, 지출 출력
+	public List<Map<String, Object>> monthSum(String memberId, int targetYear, int targetMonth){
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT category , sum(price) sum FROM cashbook WHERE member_id=? AND YEAR(cashbook_date)=? and MONTH(cashbook_date)=? GROUP BY category";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1,memberId);
+			stmt.setInt(2,targetYear);
+			stmt.setInt(3,targetMonth);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("category", rs.getString("category"));
+				map.put("sum", rs.getInt("sum"));
+				list.add(map);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}		
+		return list;
+	}
+		
 }
