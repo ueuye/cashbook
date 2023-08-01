@@ -475,15 +475,38 @@ public class CashbookDao {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1,memberId);
-			stmt.setInt(2,targetYear);
-			stmt.setInt(3,targetMonth-2);
-			stmt.setString(4,memberId);
-			stmt.setInt(5,targetYear);
-			stmt.setInt(6,targetMonth-1);
-			stmt.setString(7,memberId);
-			stmt.setInt(8,targetYear);
-			stmt.setInt(9,targetMonth);
+		
+			if(targetMonth == 1) { // 1월인 경우
+				stmt.setString(1,memberId);
+				stmt.setInt(2,targetYear-1);
+				stmt.setInt(3,11);
+				stmt.setString(4,memberId);
+				stmt.setInt(5,targetYear-1);
+				stmt.setInt(6,12);
+				stmt.setString(7,memberId);
+				stmt.setInt(8,targetYear);
+				stmt.setInt(9,targetMonth);
+			}else if(targetMonth == 2) { // 2월인 경우
+				stmt.setString(1,memberId);
+				stmt.setInt(2,targetYear-1);
+				stmt.setInt(3,12);
+				stmt.setString(4,memberId);
+				stmt.setInt(5,targetYear);
+				stmt.setInt(6,targetMonth-1);
+				stmt.setString(7,memberId);
+				stmt.setInt(8,targetYear);
+				stmt.setInt(9,targetMonth);
+			}else {
+				stmt.setString(1,memberId);
+				stmt.setInt(2,targetYear);
+				stmt.setInt(3,targetMonth-2);
+				stmt.setString(4,memberId);
+				stmt.setInt(5,targetYear);
+				stmt.setInt(6,targetMonth-1);
+				stmt.setString(7,memberId);
+				stmt.setInt(8,targetYear);
+				stmt.setInt(9,targetMonth);
+			}
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
