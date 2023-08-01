@@ -36,7 +36,7 @@
 	<br>
 	<div class="container conc">
 		<form method="post" action="${pageContext.request.contextPath}/on/removeMember" id="removeMember"> 
-			<div class="shadow">
+			<div class="shadow bt">
 				<table class="table table-bordered text-center">
 						<tr>
 							<td class="td03">

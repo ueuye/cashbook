@@ -53,7 +53,7 @@
 		</div>
 		<br>
 		<form method="post" action="${pageContext.request.contextPath}/on/modifyMember" id="modifyMember">
-			<div class="shadow">
+			<div class="shadow bt">
 				<table class="table table-bordered text-center">
 					<tr>
 						<td class="td03">아이디</td>

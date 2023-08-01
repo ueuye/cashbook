@@ -10,6 +10,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+<!-- <a href="https://www.flaticon.com/kr/free-icons/svg" title="svg 아이콘">Svg 아이콘  제작자: popcornarts - Flaticon</a> -->
 </head>
 <body>
 <div class="container w70">
@@ -26,7 +27,7 @@
 	<div class="container w85 p-t-70">
 		<h2 class="dis">${targetYear}년 ${targetMonth+1}월 ${targetDate}일</h2>
 		<div class="dis_r p-b-30">
-			<a class="btn b03 cl02 dis" href="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">추가</a>
+			<a class="btn b03 cl02 dis" href="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">&#43; 추가</a>
 		</div>
 		<table border="1" class="table text-center shadow">
 			<tr>
@@ -35,16 +36,22 @@
 				<th>금액</th>
 				<th>메모</th>
 				<th>&nbsp;</th>
-				<th>&nbsp;</th>
 			</tr>
 			<c:forEach var="c" items="${list}">
 				<tr>
 					<td class="td04">${c.category }</td>
 					<td class="td04">${c.subcategory }</td>
-					<td class="td04">${c.price }</td>
+					<td class="td04">
+						<a class="an cl01" href="${pageContext.request.contextPath}/on/modifyCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">
+							${c.price }
+						</a>
+					</td>
 					<td class="td04">${c.memo }</td>
-					<td class="td04"><a class="an cl01" href="${pageContext.request.contextPath}/on/modifyCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">수정</a></td>
-					<td class="td04"><a class="an cl01" href="${pageContext.request.contextPath}/on/removeCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">삭제</a></td>
+					<td class="td04">
+						<a class="an cl01" href="${pageContext.request.contextPath}/on/removeCashbook?cashbookNo=${c.cashbookNo}&targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">
+							<img src="${pageContext.request.contextPath}/css/img/delete.png" width=30 height=30>
+						</a>
+					</td>
 				</tr>		
 			</c:forEach>
 		</table>

@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/*********** 테이블 위 선 ***********/
+.bt {
+
+	border-top: 5px solid #D97F89;
+	border-radius: 4px;
+}
 /*********** 선 없음 ***********/
 .bn {
 	border:none;

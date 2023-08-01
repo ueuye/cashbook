@@ -255,7 +255,7 @@ $(document).ready(function(){
 	</div>
 </div>
 <br>
-<div class="container w85 shadow p-tb-50">
+<div class="container w85 shadow p-tb-50 bt">
 	<br>
 	<div class="row">
 		<div class="col dis p-l-40 p-r-30">
