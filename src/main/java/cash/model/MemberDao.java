@@ -206,4 +206,59 @@ public class MemberDao {
 
 		return idCount;
 	}
+	
+	// 카카오톡 로그인시체크
+	public int checkIdkakao(String memberId){
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM member WHERE member_id = ?";
+		
+		int row = 0;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				row = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+			} catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return row;
+	}
+	
+	// 최초 카카오 로그인시 member에 아이디 저장
+	public int insertKakao(String memberId){
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = "INSERT INTO member(member_id, member_pw, createdate, updatedate) values (?, PASSWORD(1234), NOW(), NOW())";
+		
+		int row = 0;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			row = stmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return row;
+	}
 }

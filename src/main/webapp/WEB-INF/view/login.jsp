@@ -5,6 +5,36 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	Kakao.init('8b4760892f1f4063071b85a72b51149f');
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	//카카오로그인
+	function kakaoLogin() {
+	    Kakao.Auth.login({
+	      success: function (response) {
+	        Kakao.API.request({
+	          url: '/v2/user/me',
+	          success: function (response) {
+	        	  console.log("리스폰스 확인" + response);
+				  // 로그인 상태 확인 및 loginAction.jsp로 데이터 전달
+                  if (response.id) {
+					 window.location.href = '${pageContext.request.contextPath}/kakaoLogin?email=' + encodeURIComponent(response.kakao_account.email) ;
+                  }
+	          },
+	          fail: function (error) {
+	            console.log(error)
+	          },
+	        })
+	      },
+	      fail: function (error) {
+	        console.log(error)
+	      },
+		})
+	}
+</script>
 </head>
 <body>
 <form class="form" method="post" action="${pageContext.request.contextPath}/off/login">
@@ -38,7 +68,10 @@
 			<label class="ck">아이디 저장</label>	
 		</div>
 		<div class="btn-group">
-			<button class="btn btn—primary" type="submit">Sign in</button>
+			<div style="display: inline-flex; line-height:0;">
+				<button class="btn btn—primary" type="submit">Sign in</button>
+				<a href="javascript:kakaoLogin()" style="text-decoration: none; display: inline-block; padding-left: 10px;"><img src="${pageContext.request.contextPath}/css/img/kakao_login_medium.png" style="height: 100%;"></a>
+			</div>	
 			<a class="btn—text" href="${pageContext.request.contextPath}/off/addMember">sign up</a>
 		</div>
 	</div>
