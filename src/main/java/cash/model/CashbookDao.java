@@ -23,7 +23,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			String sql = "INSERT INTO "
 					+ "cashbook(member_id, category, subcategory, cashbook_date, price, memo, updatedate, createdate)"
 					+ "VALUES(?,?,?,?,?,?,NOW(),NOW())";
@@ -72,7 +72,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,memberId);
 			stmt.setString(2,word);
@@ -119,7 +119,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,memberId);
 			stmt.setString(2,word);
@@ -157,7 +157,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,memberId);
 			stmt.setInt(2,targetYear);
@@ -205,7 +205,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,memberId);
 			stmt.setInt(2,targetYear);
@@ -250,7 +250,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,memberId);
 			stmt.setInt(2,targetYear);
@@ -294,7 +294,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1,cashbookNo);
 			rs = stmt.executeQuery();
@@ -328,7 +328,7 @@ public class CashbookDao {
 		String sql = "UPDATE cashbook SET category = ?, subcategory=?, price = ?, memo = ? , updatedate=NOW() WHERE cashbook_no = ?";
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, cashbook.getCategory());
@@ -365,7 +365,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, cashbookNo);
 			row = stmt.executeUpdate();
@@ -395,7 +395,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,memberId);
 			stmt.setInt(2,targetYear);
@@ -432,7 +432,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,memberId);
 			stmt.setInt(2,targetYear);
@@ -473,7 +473,7 @@ public class CashbookDao {
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 		
 			if(targetMonth == 1) { // 1월인 경우

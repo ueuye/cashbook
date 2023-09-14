@@ -11,7 +11,7 @@ public class CategoryDao {
 	public ArrayList<String> selectSubcateList(String category) throws Exception {
 	      ArrayList<String> list = new ArrayList<>();
 	      Class.forName("org.mariadb.jdbc.Driver");
-	      Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cash","root","java1234");
+	      Connection conn = DriverManager.getConnection("jdbc:mariadb://43.202.102.1:3306/cash","root","java1234");
 	      String sql = "SELECT subcategory FROM category WHERE category = ?";
 	      PreparedStatement stmt = conn.prepareStatement(sql);
 	      stmt.setString(1, category);
