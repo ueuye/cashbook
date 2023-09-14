@@ -39,3 +39,12 @@
   - 월별 총 수입/지출 그래프
   - 최근 3개월 소비 현황 그래프
   - 월별/카테고리별 소비 현황 그래프 
+
+# 🔎 주요 구현화면 미리보기
+|로그인화면|메인화면|
+|--|--|
+|<img width="800" alt="cashbook_1" src="https://github.com/ueuye/cashbook/assets/133735744/df11fcca-aff5-4218-91ae-b37f6b94c794">|<img width="800" alt="cashbook_2" src="https://github.com/ueuye/cashbook/assets/133735744/798cb2aa-9a0e-4a19-bad9-94e8e7c39687">|
+
+|해시태그|차트|
+|--|--|
+|<img width="800" alt="cashbook_3" src="https://github.com/ueuye/cashbook/assets/133735744/2c7b6702-14a5-4e11-983d-4a8c6898f893">|<img width="800" alt="cashbook_4" src="https://github.com/ueuye/cashbook/assets/133735744/ebc2ca44-0ddc-40a5-89c1-8b5778060979">|
