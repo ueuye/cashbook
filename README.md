@@ -6,7 +6,7 @@
 - 개인프로젝트
 
 # 🛠️ 개발 환경
-- Language (언어) : `HTML5` `CSS3` `Java`, 'SQL', `JavaScript`, 'Ajax'
+- Language (언어) : `HTML5` `CSS3` `Java`, `SQL`, `JavaScript`, `Ajax`
 - Library (라이브러리): `Bootstrap`, `jQuery`, `JSTL`
 - Database (데이터베이스) : `MariaDB`
 - WAS (Web Application Server) : `Apache Tomcat9`
